@@ -14,7 +14,9 @@ useHead({
   <ClerkLoaded>
     <div class="h-full">
       <Navbar />
-      <div class="hidden md:flex mt-16 h-full w-20 flex-col fixed inset-y-0">
+      <div
+        class="hidden md:flex mt-16 h-full w-20 flex-col fixed inset-y-0 mx-2.5"
+      >
         <Sidebar />
       </div>
       <main class="md:pl-20 pt-16 h-full">

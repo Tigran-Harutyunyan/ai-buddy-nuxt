@@ -41,7 +41,7 @@ const currentRoute = useRoute();
 </script>
 
 <template>
-  <div class="space-y-4 flex flex-col h-full text-primary bg-secondary">
+  <div class="space-y-4 flex flex-col h-full text-primary bg-secondary mt-1.5">
     <div class="p-3 flex-1 flex justify-center">
       <div class="space-y-2">
         <div

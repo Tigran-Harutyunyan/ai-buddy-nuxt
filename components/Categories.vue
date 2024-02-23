@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import qs from "query-string";
 import { cn } from "@/lib/utils";
 import { type Category } from "@prisma/client";
 
