@@ -1,9 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt','@nuxtjs/google-fonts', '@pinia/nuxt', "@nuxt/image",'@vueuse/nuxt'  ],
+  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxtjs/google-fonts', '@nuxtjs/cloudinary', '@pinia/nuxt', "@nuxt/image", '@vueuse/nuxt', '@vee-validate/nuxt'],
   build: {
-    transpile: ['vue-clerk', '@clerk/clerk-js' ],
+    transpile: ['vue-clerk', '@clerk/clerk-js'],
   },
   shadcn: {
     /**
