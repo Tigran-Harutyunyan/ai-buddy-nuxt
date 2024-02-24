@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ middleware: "auth" });
+
 import qs from "query-string";
 
 const { data: categories } = useLazyAsyncData("categories", () =>

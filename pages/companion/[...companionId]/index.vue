@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ middleware: "auth" });
+
 import { useClerkProvide } from "vue-clerk";
 import CompanionForm from "@/components/companion/CompanionForm.vue";
 
