@@ -52,11 +52,13 @@ watch(
 </script>
 
 <template>
-  <Search class="absolute h-4 w-4 top-3 left-4 text-muted-foreground" />
-  <Input
-    placeholder="Search..."
-    class="pl-10 bg-primary/10"
-    v-model="name"
-    @input="(e) => debounceInput(e)"
-  />
+  <div class="relative">
+    <Search class="absolute h-4 w-4 top-3 left-4 text-muted-foreground" />
+    <Input
+      placeholder="Search..."
+      class="pl-10 bg-primary/10"
+      v-model="name"
+      @input="(e) => debounceInput(e)"
+    />
+  </div>
 </template>
