@@ -21,9 +21,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      clerkPublishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
-      appUrl: process.env.NEXT_PUBLIC_APP_URL,
-      unsplashAccessKey: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY,
+      clerkPublishableKey: process.env.NUXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+      appUrl: process.env.NUXT_PUBLIC_APP_URL,
+      unsplashAccessKey: process.env.NUXT_PUBLIC_UNSPLASH_ACCESS_KEY,
     },
     clerkSecretKey: process.env.CLERK_SECRET_KEY,
     stripeKey: process.env.STRIPE_API_KEY,
