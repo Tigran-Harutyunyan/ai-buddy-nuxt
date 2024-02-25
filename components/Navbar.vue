@@ -4,12 +4,15 @@ import { Button } from "@/components/ui/button";
 import { UserButton } from "vue-clerk";
 import ModeToggle from "@/components/ModeToggle.vue";
 import MobileSidebar from "@/components/MobileSidebar.vue";
+import { useMainStore } from "@/stores/main";
 
 interface NavbarProps {
   isPro?: boolean;
 }
 
 const { isPro } = defineProps<NavbarProps>();
+
+const { setProModal } = useMainStore();
 </script>
 
 <template>
@@ -27,7 +30,7 @@ const { isPro } = defineProps<NavbarProps>();
       </NuxtLink>
     </div>
     <div class="flex items-center gap-x-3">
-      <Button v-if="!isPro" @click="" size="sm" variant="premium">
+      <Button v-if="!isPro" @click="setProModal" size="sm" variant="premium">
         Upgrade
         <Sparkles class="h-4 w-4 fill-white text-white ml-2" />
       </Button>

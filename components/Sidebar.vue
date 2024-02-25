@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { cn } from "@/lib/utils";
 import { Home, Plus, Settings } from "lucide-vue-next";
+import { useMainStore } from "@/stores/main";
+
+const { setProModal } = useMainStore();
 
 interface SidebarProps {
   isPro?: boolean;
@@ -30,7 +33,8 @@ const routes = [
 ];
 const onNavigate = (url: string, pro: boolean) => {
   if (pro && !isPro) {
-    return; //proModal.onOpen();
+    setProModal(true);
+    return;
   }
 
   return router.push(url);
