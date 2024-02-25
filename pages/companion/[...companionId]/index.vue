@@ -3,10 +3,15 @@ definePageMeta({ middleware: "auth" });
 
 import { useClerkProvide } from "vue-clerk";
 import CompanionForm from "@/components/companion/CompanionForm.vue";
+import { useMainStore } from "@/stores/main";
+
+const { setProModal } = useMainStore();
 
 const { derivedState } = useClerkProvide();
 
 const router = useRouter();
+
+const { companionId } = useRoute().params;
 
 const isAuth = computed(() => {
   return !!derivedState.value?.userId;
@@ -16,13 +21,22 @@ if (!isAuth) {
   router.push("/sign-in");
 }
 
+const isPro = await $fetch("/api/subscription/check", {
+  method: "get",
+});
+
+if (!isPro && companionId !== "new") {
+  router.push("/");
+  setTimeout(() => {
+    setProModal(true);
+  }, 300);
+}
+
 const { data: categories } = useLazyAsyncData("categories", () =>
   $fetch("/api/categories")
 );
 
 const companion = ref();
-
-const { companionId } = useRoute().params;
 
 const loadingCompanion = ref(true);
 
@@ -37,14 +51,6 @@ if (companionId !== "new") {
     companion.value = response;
   }
 }
-
-// const validSubscription = await $fetch("/api/subscription/check", {
-//   method: "get",
-// });
-
-// if (!validSubscription) {
-//   router.push("/");
-// }
 </script>
 
 <template>
