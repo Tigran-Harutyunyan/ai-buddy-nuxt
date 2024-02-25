@@ -8,6 +8,12 @@ useHead({
     class: "bg-secondary",
   },
 });
+
+const isPro = await $fetch("/api/subscription/check", {
+  method: "get",
+});
+
+provide("isPro", isPro);
 </script>
 <template>
   <ClerkLoading> </ClerkLoading>
@@ -23,5 +29,6 @@ useHead({
         <slot />
       </main>
     </div>
+    <ProModal />
   </ClerkLoaded>
 </template>
