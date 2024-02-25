@@ -12,7 +12,6 @@ export default defineEventHandler(async (event) => {
 
     if (!(auth?.userId)) return;
 
-
     const { chatId } = getRouterParams(event);
 
     if (!chatId) {
@@ -22,9 +21,7 @@ export default defineEventHandler(async (event) => {
         });
     }
 
-    const { prompt } = await readBody(event)
-
-
+    const { prompt } = await readBody(event);
 
     try {
         const identifier = getRequestURL(event) + "-" + auth.userId;
@@ -36,7 +33,6 @@ export default defineEventHandler(async (event) => {
                 statusMessage: "Rate limit exceeded"
             });
         }
-
 
         const companion = await prisma.companion.update({
             where: {
@@ -52,8 +48,6 @@ export default defineEventHandler(async (event) => {
                 },
             }
         });
-
-
 
         if (!companion) {
             return createError({
@@ -122,22 +116,24 @@ export default defineEventHandler(async (event) => {
             ${recentChatHistory}\n${companion.name}:`
                 )
                 .catch(console.error)
-        );
- 
+        ); 
+       
+
         const cleaned = resp.replaceAll(",", "");
         const chunks = cleaned.split("\n");
         const response = chunks[0]; 
         
-        // await memoryManager.writeToHistory("" + response.trim(), companionKey);
-
+        await memoryManager.writeToHistory("" + response.trim(), companionKey);
 
         // var Readable = require("stream").Readable; 
         // let s = new Readable();
         // s.push(response);
         // s.push(null);
  
-        if (response !== undefined && response.length > 1) {
-            // memoryManager.writeToHistory("" + response.trim(), companionKey);
+        if (response !== 'undefined' && response.length > 1) {
+             memoryManager.writeToHistory("" + response.trim(), companionKey);
+
+            console.log('!!!!',typeof response)
 
             await prisma.companion.update({
                 where: {
@@ -153,9 +149,12 @@ export default defineEventHandler(async (event) => {
                     },
                 }
             });
-        }
-        return response
-        //return new StreamingTextResponse(s);
+            return response;
+        } 
+        
+        if (resp === 'undefined') {
+            return 'error-happened'; 
+        } 
     } catch (error) {
         return createError({
             statusCode: 500,
