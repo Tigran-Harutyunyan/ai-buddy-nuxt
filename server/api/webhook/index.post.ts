@@ -1,6 +1,7 @@
 import prismadb from "@/lib/prismadb";
 import Stripe from "stripe";
 import { defineStripeWebhook } from '@fixers/nuxt-stripe/server';
+import { useRequestHeaders } from "nuxt/app";
 
 /**
  * @param event - the H3 event
@@ -10,14 +11,14 @@ import { defineStripeWebhook } from '@fixers/nuxt-stripe/server';
 
 const STRIPE_API_KEY = useRuntimeConfig().stripeKey as string;
 
-const webhookSecret = useRuntimeConfig().stripeWebhookSecret
+const WEBHOOK_SECRET = useRuntimeConfig().stripeWebhookSecret
 
 const stripe = new Stripe(STRIPE_API_KEY, {
   apiVersion: "2023-10-16"
 });
 
 const webhookOptions = {
-  webhookSecret,
+  webhookSecret: WEBHOOK_SECRET,
   stripe,
 }
 
@@ -29,10 +30,7 @@ export default defineStripeWebhook(async ({ event, stripeEvent }) => {
     return { ok: false }
   }
 
-  console.log(stripe);
-
   const session = stripeEvent.data.object as Stripe.Checkout.Session;
-
 
   switch (stripeEvent.type) {
     case 'checkout.session.completed': {
@@ -49,7 +47,7 @@ export default defineStripeWebhook(async ({ event, stripeEvent }) => {
 
       await prismadb.userSubscription.create({
         data: {
-          userId: session?.metadata?.userId,
+          userId: session?.metadata?.userId as string,
           stripeSubscriptionId: subscription.id,
           stripeCustomerId: subscription.customer as string,
           stripePriceId: subscription.items.data[0].price.id,

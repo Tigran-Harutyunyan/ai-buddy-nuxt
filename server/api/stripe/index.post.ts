@@ -26,8 +26,6 @@ export default defineEventHandler(async (event) => {
 
   const settingsUrl = `${APP_URL}/settings/`;
 
-  let url = "";
-
   try {
 
     const userSubscription = await prismadb.userSubscription.findUnique({
