@@ -9,21 +9,19 @@ useHead({
   },
 });
 
-const isPro = await $fetch("/api/subscription/check", {
-  method: "get",
-});
-
-provide("isPro", isPro);
+const { data: isPro } = useAsyncData("isPro", () =>
+  $fetch("/api/subscription/check")
+);
 </script>
 <template>
   <ClerkLoading> </ClerkLoading>
   <ClerkLoaded>
     <div class="h-full">
-      <Navbar />
+      <Navbar :isPro="isPro" />
       <div
         class="hidden md:flex mt-16 h-full w-20 flex-col fixed inset-y-0 mx-2.5"
       >
-        <Sidebar />
+        <Sidebar :isPro="isPro" />
       </div>
       <main class="md:pl-20 pt-16 h-full">
         <slot />

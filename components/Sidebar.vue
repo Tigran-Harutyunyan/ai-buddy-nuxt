@@ -8,6 +8,7 @@ const { setProModal } = useMainStore();
 interface SidebarProps {
   isPro?: boolean;
 }
+const { isPro } = defineProps<SidebarProps>();
 
 const router = useRouter();
 
@@ -39,7 +40,6 @@ const onNavigate = (url: string, pro: boolean) => {
 
   return router.push(url);
 };
-const { isPro } = defineProps<SidebarProps>();
 
 const currentRoute = useRoute();
 </script>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-definePageMeta({ middleware: "auth" });
-const { isPro } = inject("isPro");
+definePageMeta({ middleware: "auth", title: "Companion.ai | Settings" });
+
+const { data: isPro } = useNuxtData("isPro");
 </script>
 
 <template>
