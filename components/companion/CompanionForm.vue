@@ -18,7 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import type { Category, Companion } from "@prisma/client";
-
+import { useToast } from "@/components/ui/toast/use-toast";
 import { useClerkProvide } from "vue-clerk";
 
 const { state } = useClerkProvide();
@@ -29,8 +29,6 @@ interface CompanionFormProps {
 }
 
 const { categories, initialData } = defineProps<CompanionFormProps>();
-
-import { useToast } from "@/components/ui/toast/use-toast";
 
 const { toast } = useToast();
 
