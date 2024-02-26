@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ClerkLoaded, ClerkLoading } from "vue-clerk";
-import Loading from "~/components/Loading.vue";
+import { ClerkLoaded } from "vue-clerk";
 import Navbar from "@/components/Navbar.vue";
 import Sidebar from "@/components/Sidebar.vue";
 useHead({
@@ -14,7 +13,6 @@ const { data: isPro } = useAsyncData("isPro", () =>
 );
 </script>
 <template>
-  <ClerkLoading> </ClerkLoading>
   <ClerkLoaded>
     <div class="h-full">
       <Navbar :isPro="isPro" />
