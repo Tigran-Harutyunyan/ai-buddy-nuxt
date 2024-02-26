@@ -1,10 +1,10 @@
 
 import prisma from "@/lib/prismadb";
 import { StreamingTextResponse, LangChainStream } from "ai";
-import { Replicate } from "langchain/llms/replicate";
 import { CallbackManager } from "langchain/callbacks";
 import { MemoryManager } from "@/lib/memory";
 import { rateLimit } from "@/lib/rate-limit";
+import { OpenAI } from "@langchain/openai";
 
 export default defineEventHandler(async (event) => {
 
@@ -62,11 +62,13 @@ export default defineEventHandler(async (event) => {
         const companionKey = {
             companionName: name!,
             userId: auth.userId,
-            modelName: "llama2-13b",
+            modelName: "chatgpt",
         };
         const memoryManager = await MemoryManager.getInstance();
 
         const records = await memoryManager.readLatestHistory(companionKey);
+
+      
         if (records.length === 0) {
             await memoryManager.seedChatHistory(companion.seed, "\n\n", companionKey);
         }
@@ -89,51 +91,36 @@ export default defineEventHandler(async (event) => {
             relevantHistory = similarDocs.map((doc) => doc.pageContent).join("\n");
         }
         const { handlers } = LangChainStream();
-        // Call Replicate for inference
-        const model = new Replicate({
-            model:
-                "a16z-infra/llama-2-13b-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5",
-            input: {
-                max_length: 2048,
-            },
-            apiKey: process.env.REPLICATE_API_TOKEN,
-            callbackManager: CallbackManager.fromHandlers(handlers),
+
+        const model = new OpenAI({
+            streaming: true,
+            modelName: "gpt-3.5-turbo-16k",
+            openAIApiKey: process.env.OPENAI_API_KEY,
+            temperature: 0.9,
+            
         });
 
         // Turn verbose on for debugging
-        model.verbose = true; 
+        model.verbose = true;
 
-        const resp = String(
-            await model
-                .call(
-                    `
+        const resp =  await model.call(
+            `
             ONLY generate plain sentences without prefix of who is speaking. DO NOT use ${companion.name}: prefix. 
     
             ${companion.instructions}
     
             Below are relevant details about ${companion.name}'s past and the conversation you are in.
             ${relevantHistory} 
-            ${recentChatHistory}\n${companion.name}:`
-                )
-                .catch(console.error)
-        ); 
-       
+            ${recentChatHistory}\n${companion.name}:`);
 
         const cleaned = resp.replaceAll(",", "");
         const chunks = cleaned.split("\n");
         const response = chunks[0]; 
-        
+
         await memoryManager.writeToHistory("" + response.trim(), companionKey);
 
-        // var Readable = require("stream").Readable; 
-        // let s = new Readable();
-        // s.push(response);
-        // s.push(null);
- 
         if (response !== 'undefined' && response.length > 1) {
-             memoryManager.writeToHistory("" + response.trim(), companionKey);
-
-            console.log('!!!!',typeof response)
+            memoryManager.writeToHistory("" + response.trim(), companionKey);
 
             await prisma.companion.update({
                 where: {
@@ -150,11 +137,11 @@ export default defineEventHandler(async (event) => {
                 }
             });
             return response;
-        } 
-        
+        }
+
         if (resp === 'undefined') {
-            return 'error-happened'; 
-        } 
+            return 'error-happened';
+        }
     } catch (error) {
         return createError({
             statusCode: 500,
