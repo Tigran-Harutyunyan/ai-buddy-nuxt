@@ -21,17 +21,18 @@ const loading = ref(false);
 const onSubscribe = async () => {
   try {
     loading.value = true;
-    const response = await $fetch("/api/stripe", {
+    let response = await $fetch("/api/stripe", {
       method: "post",
     });
 
-    if (response?.url) {
-      window.location.href = response?.url;
+    if (typeof response === "object" && response && "url" in response) {
+      window.location.href = response.url as string;
     }
   } catch (error) {
     toast({
       description: "Something went wrong",
       variant: "destructive",
+      duration: 3000,
     });
   } finally {
     loading.value = false;

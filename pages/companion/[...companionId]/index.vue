@@ -1,6 +1,10 @@
 <script setup lang="ts">
 definePageMeta({ middleware: "auth" });
 
+useHead({
+  title: "Companion AI ",
+});
+
 import { useClerkProvide } from "vue-clerk";
 import CompanionForm from "@/components/companion/CompanionForm.vue";
 import { useMainStore } from "@/stores/main";
@@ -47,7 +51,7 @@ if (companionId !== "new") {
 
   loadingCompanion.value = false;
 
-  if (response?.id) {
+  if (response && typeof response === "object" && "id" in response) {
     companion.value = response;
   }
 }

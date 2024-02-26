@@ -91,7 +91,7 @@ const onSubmit = form.handleSubmit((values) => {
     body: { ...values, userName: state.user?.firstName },
   })
     .then((response) => {
-      if (response?.id) {
+      if (response && typeof response === "object" && "id" in response) {
         toast({
           variant: "default",
           description: "Success.",

@@ -15,7 +15,7 @@ const response = await $fetch(`/api/companion/chat/${chatId}`, {
   method: "GET",
 });
 
-if (response?.id) {
+if (response && typeof response === "object" && "id" in response) {
   companion.value = response;
 }
 </script>

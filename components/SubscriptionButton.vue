@@ -19,13 +19,14 @@ const onClick = async () => {
       method: "POST",
     });
 
-    if (response?.url) {
-      window.location.href = response.url;
+    if (response && typeof response === "object" && "url" in response) {
+      window.location.href = response.url as string;
     }
   } catch (error) {
     toast({
       description: "Something went wrong",
       variant: "destructive",
+      duration: 3000,
     });
   } finally {
     loading.value = false;
