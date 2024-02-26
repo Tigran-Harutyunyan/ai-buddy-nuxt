@@ -1,6 +1,10 @@
 <script setup lang="ts">
 definePageMeta({ middleware: "auth" });
 
+useHead({
+  title: "AI companion | Home",
+});
+
 import qs from "query-string";
 
 const { data: categories } = useLazyAsyncData("categories", () =>

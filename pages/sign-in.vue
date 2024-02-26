@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { SignIn } from "vue-clerk";
-
+useHead({
+  title: "AI companion | Sign-in",
+});
 definePageMeta({
   middleware: ["public"],
   title: "ai buddy | Sign-in",

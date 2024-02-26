@@ -2,7 +2,7 @@
 definePageMeta({ middleware: "auth" });
 
 useHead({
-  title: "Companion AI ",
+  title: "AI companion | Companion Info",
 });
 
 import { useClerkProvide } from "vue-clerk";

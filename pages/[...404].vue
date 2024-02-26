@@ -1,5 +1,8 @@
 <script setup>
 import { Button } from "~/components/ui/button";
+useHead({
+  title: "AI companion | 404",
+});
 </script>
 
 <template>
