@@ -6,7 +6,7 @@ import { useMainStore } from "@/stores/main";
 
 const { updateEventTrigger } = useMainStore();
 
-const emit = defineEmits(["submit"]);
+const emit = defineEmits(["submit", "newMessage"]);
 
 const model = defineModel<{
   model: string;
@@ -18,9 +18,9 @@ interface ChatFormProps {
 
 const { isLoading } = defineProps<ChatFormProps>();
 
-const onSubmit = (e) => {
+const onSubmit = (e: Event) => {
   emit("submit", e);
-
+  emit("newMessage", model);
   setTimeout(() => {
     updateEventTrigger();
   }, 400);

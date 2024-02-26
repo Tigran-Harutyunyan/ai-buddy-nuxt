@@ -50,13 +50,21 @@ const { input, isLoading, handleSubmit } = useCompletion({
       messages.value.push(systemMessage);
     }
 
-    input.value = "";
-
     setTimeout(() => {
       updateEventTrigger();
     }, 400);
   },
 });
+
+const onNewMessage = () => {
+  const userMessage: ChatMessageProps = {
+    role: "user",
+    content: input.value,
+  };
+  messages.value.push(userMessage);
+
+  input.value = "";
+};
 </script>
 
 <template>
@@ -67,6 +75,11 @@ const { input, isLoading, handleSubmit } = useCompletion({
       :isLoading="isLoading"
       :messages="messages"
     />
-    <ChatForm :isLoading="isLoading" v-model="input" @submit="handleSubmit" />
+    <ChatForm
+      :isLoading="isLoading"
+      v-model="input"
+      @submit="handleSubmit"
+      @newMessage="onNewMessage"
+    />
   </div>
 </template>
