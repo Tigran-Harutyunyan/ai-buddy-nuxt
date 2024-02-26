@@ -44,6 +44,7 @@ const { input, isLoading, handleSubmit } = useCompletion({
       toast({
         variant: "destructive",
         description: "Something went wrong.",
+        duration: 3000,
       });
     } else {
       messages.value.push(systemMessage);

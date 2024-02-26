@@ -36,12 +36,14 @@ const onDelete = async () => {
     });
     toast({
       description: "Success.",
+      duration: 3000,
     });
     router.push("/");
   } catch (error) {
     toast({
       variant: "destructive",
       description: "Something went wrong.",
+      duration: 3000,
     });
   }
 };

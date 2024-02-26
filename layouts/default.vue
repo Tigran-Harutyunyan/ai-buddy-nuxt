@@ -21,7 +21,7 @@ const { data: isPro } = useAsyncData("isPro", () =>
       <div
         class="hidden md:flex mt-16 h-full w-20 flex-col fixed inset-y-0 mx-2.5"
       >
-        <Sidebar :isPro="isPro" />
+        <Sidebar />
       </div>
       <main class="md:pl-20 pt-16 h-full">
         <slot />
