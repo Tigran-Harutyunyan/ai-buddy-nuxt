@@ -35,7 +35,7 @@ export default defineStripeWebhook(async ({ event, stripeEvent }) => {
   switch (stripeEvent.type) {
     case 'checkout.session.completed': {
       const subscription = await stripe.subscriptions.retrieve(
-        session.subscription as string
+        session.subscription
       )
 
       if (!session?.metadata?.userId) {
@@ -47,9 +47,9 @@ export default defineStripeWebhook(async ({ event, stripeEvent }) => {
 
       await prismadb.userSubscription.create({
         data: {
-          userId: session?.metadata?.userId as string,
+          userId: session?.metadata?.userId,
           stripeSubscriptionId: subscription.id,
-          stripeCustomerId: subscription.customer as string,
+          stripeCustomerId: subscription.customer,
           stripePriceId: subscription.items.data[0].price.id,
           stripeCurrentPeriodEnd: new Date(
             subscription.current_period_end * 1000
@@ -60,7 +60,7 @@ export default defineStripeWebhook(async ({ event, stripeEvent }) => {
     }
     case 'invoice.payment_succeeded': {
       const subscription = await stripe.subscriptions.retrieve(
-        session.subscription as string
+        session.subscription
       )
 
       await prismadb.userSubscription.update({
