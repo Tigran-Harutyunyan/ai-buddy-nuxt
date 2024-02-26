@@ -7,7 +7,7 @@ import MobileSidebar from "@/components/MobileSidebar.vue";
 import { useMainStore } from "@/stores/main";
 
 interface NavbarProps {
-  isPro?: boolean;
+  isPro?: boolean | null;
 }
 
 const { isPro } = defineProps<NavbarProps>();
@@ -20,7 +20,7 @@ const { setProModal } = useMainStore();
     class="fixed w-full z-50 flex justify-between items-center py-2 px-4 h-16 border-b border-primary/10 bg-secondary"
   >
     <div class="flex items-center">
-      <MobileSidebar :isPro="isPro" />
+      <MobileSidebar />
       <NuxtLink to="/">
         <h1
           class="hidden md:block text-xl md:text-3xl font-bold text-primary font-poppins"
@@ -30,7 +30,12 @@ const { setProModal } = useMainStore();
       </NuxtLink>
     </div>
     <div class="flex items-center gap-x-3">
-      <Button v-if="!isPro" @click="setProModal" size="sm" variant="premium">
+      <Button
+        v-if="isPro !== null && isPro === false"
+        @click="setProModal"
+        size="sm"
+        variant="premium"
+      >
         Upgrade
         <Sparkles class="h-4 w-4 fill-white text-white ml-2" />
       </Button>

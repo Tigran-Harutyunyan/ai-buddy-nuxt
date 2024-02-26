@@ -5,10 +5,7 @@ import { useMainStore } from "@/stores/main";
 
 const { setProModal } = useMainStore();
 
-interface SidebarProps {
-  isPro?: boolean;
-}
-const { isPro } = defineProps<SidebarProps>();
+const { data: isPro } = useNuxtData("isPro");
 
 const router = useRouter();
 
@@ -33,7 +30,7 @@ const routes = [
   },
 ];
 const onNavigate = (url: string, pro: boolean) => {
-  if (pro && !isPro) {
+  if (pro && !isPro.value) {
     setProModal(true);
     return;
   }

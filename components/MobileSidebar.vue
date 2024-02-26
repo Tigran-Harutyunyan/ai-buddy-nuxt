@@ -2,9 +2,8 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-vue-next";
 import Sidebar from "@/components/Sidebar.vue";
-const { isPro } = defineProps<{
-  isPro?: boolean;
-}>();
+
+const { data: isPro } = useNuxtData("isPro");
 </script>
 
 <template>
