@@ -1,75 +1,21 @@
-# Nuxt 3 Minimal Starter
+# SaaS AI Companion with Nuxt.js, Vue, Tailwind, Prisma, Stripe, OpenAI
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+[Live Demo](https://ai-companion-h-tigran.vercel.app/)
 
-## Setup
+<img width="1182" alt="Screen Shot 2023-07-10 at 11 27 03 PM" src="/assets/images/1.png">
 
-Make sure to install the dependencies:
+<img width="1182" alt="Screen Shot 2023-07-10 at 11 27 03 PM" src="/assets/images/2.png">
 
-```bash
-# npm
-npm install
+Features:
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- Tailwind design
+- Tailwind animations and effects
+- Full responsiveness
+- Clerk Authentication (Email, Google, Facebook)
+- Client form validation and handling using vee validate and zod
+- Server error handling using react-toast
+- Text Generation Tool (Open AI)
+- Possibility to create new companions
+- Stripe monthly subscription
+- Free tier with API limiting
+- POST, DELETE, and GET routes in route handlers (server api)
