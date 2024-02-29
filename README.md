@@ -2,10 +2,6 @@
 
 [Live Demo](https://ai-companion-h-tigran.vercel.app/)
 
-<img width="1182" alt="Screen Shot 2023-07-10 at 11 27 03 PM" src="/assets/images/1.png">
-
-<img width="1182" alt="Screen Shot 2023-07-10 at 11 27 03 PM" src="/assets/images/2.png">
-
 Features:
 
 - Tailwind design
@@ -19,3 +15,17 @@ Features:
 - Stripe monthly subscription
 - Free tier with API limiting
 - POST, DELETE, and GET routes in route handlers (server api)
+
+<img width="1182" alt="Screen Shot 2023-07-10 at 11 27 03 PM" src="/assets/images/1.png">
+
+<img width="1182" alt="Screen Shot 2023-07-10 at 11 27 03 PM" src="/assets/images/2.png">
+
+<img width="1182" alt="Screen Shot 2023-07-10 at 11 27 03 PM" src="/assets/images/3.png">
+
+<img width="1182" alt="Screen Shot 2023-07-10 at 11 27 03 PM" src="/assets/images/4.png">
+
+<img width="1182" alt="Screen Shot 2023-07-10 at 11 27 03 PM" src="/assets/images/5.png">
+
+<img width="1182" alt="Screen Shot 2023-07-10 at 11 27 03 PM" src="/assets/images/6.png">
+
+<img width="1182" alt="Screen Shot 2023-07-10 at 11 27 03 PM" src="/assets/images/7.png">
